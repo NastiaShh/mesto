@@ -1,0 +1,16 @@
+.profile__add {
+  width: 150px;
+  min-height: 50px;
+  background-image: url(../../../images/Add_Button.png);
+  border: 2px solid white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__add {
+    margin-top: 20px;
+    width: 282px;
+  }
+}

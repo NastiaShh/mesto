@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./images/logo.svg" alt="Логотип сайта. Mesto. Russia">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__container">
+        <img class="profile__avatar" src="./images/Profile_Image.png" alt="Аватар">
+        <div class="profile__info">
+          <h1 class="profile__info-name">Жак-Ив Кусто</h1>
+          <button class="profile__info-edit button"></button>
+          <p class="profile__info-description">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add button"></button>
+    </section>
+    <section class="places">
+      <article class="place">
+        <img class="place__image" src="./images/Мурманск.jpg" alt="Мурманск">
+        <div class="place__info">
+          <h2 class="place__title">Мурманск</h2>
+          <button class="place__like button"></button>
+        </div>
+      </article>
+      <article class="place">
+        <img class="place__image" src="./images/Камчатка.jpg" alt="Камчатка">
+        <div class="place__info">
+          <h2 class="place__title">Камчатка</h2>
+          <button class="place__like button"></button>
+        </div>
+      </article>
+      <article class="place">
+        <img class="place__image" src="./images/Кабардино-Балкария.jpg" alt="Кабардино-Балкария">
+        <div class="place__info">
+          <h2 class="place__title">Кабардино-Балкария</h2>
+          <button class="place__like button"></button>
+        </div>
+      </article>
+      <article class="place">
+        <img class="place__image" src="./images/Сочи.jpg" alt="Сочи">
+        <div class="place__info">
+          <h2 class="place__title">Сочи</h2>
+          <button class="place__like button"></button>
+        </div>
+      </article>
+      <article class="place">
+        <img class="place__image" src="./images/Карелия.jpg" alt="Карелия">
+        <div class="place__info">
+          <h2 class="place__title">Карелия</h2>
+          <button class="place__like button"></button>
+        </div>
+      </article>
+      <article class="place">
+        <img class="place__image" src="./images/Карачаево-Черкесия.jpg" alt="Карачаево-Черкесия">
+        <div class="place__info">
+          <h2 class="place__title">Карачаево-Черкесия</h2>
+          <button class="place__like button"></button>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+  </footer>
+
+  <div class="popup">
+    <div class="popup__content">
+      <button class="popup__close button"></button>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form class="popup__form">
+        <input type="text" class="popup__input popup__input_name">
+        <input type="text" class="popup__input popup__input_description">
+        <button type="submit" class="popup__save button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./scripts/index.js"></script>
+  
+</body>
+</html>
