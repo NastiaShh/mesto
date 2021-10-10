@@ -1,11 +1,4 @@
 .popup__form {
-  height: 182px;
   display: flex;
   flex-direction: column;
-}
-
-@media screen and (max-width: 425px) {
-  .popup__form {
-    height: 175px;
-  }
 }

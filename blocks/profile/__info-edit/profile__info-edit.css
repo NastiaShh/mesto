@@ -5,7 +5,13 @@
   border: 1px solid white;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: black;
+  background-color: transparent;
+  transition: opacity 0.5s ease-in;
+}
+
+.profile__info-edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 425px) {

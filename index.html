@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -16,53 +16,53 @@
         <img class="profile__avatar" src="./images/Profile_Image.png" alt="Аватар">
         <div class="profile__info">
           <h1 class="profile__info-name">Жак-Ив Кусто</h1>
-          <button class="profile__info-edit button"></button>
+          <button type="button" class="profile__info-edit" aria-label="Редактировать профиль"></button>
           <p class="profile__info-description">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__add button"></button>
+      <button type="button" class="profile__add" aria-label="Добавить фотографию"></button>
     </section>
     <section class="places">
       <article class="place">
         <img class="place__image" src="./images/Мурманск.jpg" alt="Мурманск">
         <div class="place__info">
           <h2 class="place__title">Мурманск</h2>
-          <button class="place__like button"></button>
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
         </div>
       </article>
       <article class="place">
         <img class="place__image" src="./images/Камчатка.jpg" alt="Камчатка">
         <div class="place__info">
           <h2 class="place__title">Камчатка</h2>
-          <button class="place__like button"></button>
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
         </div>
       </article>
       <article class="place">
         <img class="place__image" src="./images/Кабардино-Балкария.jpg" alt="Кабардино-Балкария">
         <div class="place__info">
           <h2 class="place__title">Кабардино-Балкария</h2>
-          <button class="place__like button"></button>
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
         </div>
       </article>
       <article class="place">
         <img class="place__image" src="./images/Сочи.jpg" alt="Сочи">
         <div class="place__info">
           <h2 class="place__title">Сочи</h2>
-          <button class="place__like button"></button>
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
         </div>
       </article>
       <article class="place">
         <img class="place__image" src="./images/Карелия.jpg" alt="Карелия">
         <div class="place__info">
           <h2 class="place__title">Карелия</h2>
-          <button class="place__like button"></button>
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
         </div>
       </article>
       <article class="place">
         <img class="place__image" src="./images/Карачаево-Черкесия.jpg" alt="Карачаево-Черкесия">
         <div class="place__info">
           <h2 class="place__title">Карачаево-Черкесия</h2>
-          <button class="place__like button"></button>
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
         </div>
       </article>
     </section>
@@ -73,12 +73,12 @@
 
   <div class="popup">
     <div class="popup__content">
-      <button class="popup__close button"></button>
+      <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form class="popup__form">
-        <input type="text" class="popup__input popup__input_name">
-        <input type="text" class="popup__input popup__input_description">
-        <button type="submit" class="popup__save button">Сохранить</button>
+      <form name="form" class="popup__form">
+        <input type="text" name="name" placeholder="Жак-Ив Кусто" required class="popup__input popup__input_type_name">
+        <input type="text" name="description" placeholder="Исследователь океана" required class="popup__input popup__input_type_description">
+        <button type="submit" class="popup__save">Сохранить</button>
       </form>
     </div>
   </div>

@@ -1,7 +1,8 @@
 .header {
   max-width: 880px;
-  height: 74px;
+  min-height: 74px;
   margin: 45px auto 40px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.5);
 }
 
 @media screen and (max-width: 880px) {
@@ -12,7 +13,7 @@
 
 @media screen and (max-width: 425px) {
   .header {
-    height: 56px;
+    min-height: 56px;
     margin: 28px 0 42px 25px;
   }
 }

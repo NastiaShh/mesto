@@ -1,11 +1,18 @@
 .profile__add {
   width: 150px;
   min-height: 50px;
-  background-image: url(../../../images/Add_Button.png);
+  background-image: url(../../../images/Add_Button.svg);
   border: 2px solid white;
+  border-radius: 2px;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: black;
+  background-color: transparent;
+  transition: opacity 0.5s ease-in;
+}
+
+.profile__add:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1023px) {
