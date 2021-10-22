@@ -1,29 +1,139 @@
-const popup = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.popup__close');
+// Открытие попапа редактирования профиля
+
+const popup_profile = document.querySelector('.popup_profile');
 const editButton = document.querySelector('.profile__info-edit');
 
-const formButton = document.querySelector('.popup__button');
-const form = document.querySelector('.popup__form');
-
-const nameField = document.querySelector('.popup__input_type_name');
+const nameProfileField = document.querySelector('.popup__input_profile_name');
 const profileName = document.querySelector('.profile__info-name');
 
-const descriptionField = document.querySelector('.popup__input_type_description');
+const descriptionProfileField = document.querySelector('.popup__input_profile_description');
 const profileDescription = document.querySelector('.profile__info-description');
 
 function openPopup() {
-    nameField.value = profileName.textContent;
-    descriptionField.value = profileDescription.textContent;
-    popup.classList.add('popup_open');
-}
-
-function closePopup() {
-    popup.classList.remove('popup_open')
+    nameProfileField.value = profileName.textContent;
+    descriptionProfileField.value = profileDescription.textContent;
+    popup_profile.classList.add('popup_open');
 }
 
 editButton.addEventListener('click', openPopup)
 
-popupCloseButton.addEventListener('click', closePopup)
+
+
+// Открытие попапа добавления карточки
+const popup_place = document.querySelector('.popup_place');
+const addButton = document.querySelector('.profile__add');
+
+const namePlaceField = document.querySelector('.popup__input_place_name');
+
+const descriptionPlaceField = document.querySelector('.popup__input_place_description');
+
+function openPopupPlace() {
+    popup_place.classList.add('popup_open');
+}
+
+addButton.addEventListener('click', openPopupPlace)
+
+
+
+// Форма редактирования профиля
+
+const formButton = document.querySelector('.popup__button');
+const form = document.querySelector('.popup__form');
+
+function submitForm(event) {
+    event.preventDefault()
+
+    profileName.textContent = nameProfileField.value;
+    profileDescription.textContent = descriptionProfileField.value;
+
+    closePopup();
+}
+
+form.addEventListener('submit', submitForm)
+
+
+
+// Шесть карточек «из коробки»
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const articleElement = document.querySelector('.places')
+const templateElement = document.querySelector('.template').content
+
+initialCards.forEach(appendCard)
+
+function createCard(elem){
+  const card = templateElement.querySelector('.place').cloneNode(true)
+  card.querySelector('.place__image').src = elem.link
+  card.querySelector('.place__image').alt = elem.name
+  card.querySelector('.place__title').innerText = elem.name
+  return card
+}
+
+function appendCard(elem){
+  const card = createCard(elem)
+  articleElement.append(card)
+}
+
+
+
+// Лайк карточки
+
+const like = document.querySelectorAll('.place__like');
+
+function likeActive(i) {
+  if (like[i].classList.contains('place__like_active')) {
+      like[i].classList.remove('place__like_active')
+  } else {
+      like[i].classList.add('place__like_active')
+  }
+}
+
+for (let i = 0; i < like.length; i++) {
+  like[i].addEventListener('click', function() {
+    likeActive(i)
+  })
+}
+
+
+
+// Закрытие попапов
+
+const popupCloseButton = document.querySelectorAll('.popup__close');
+
+function closePopup() {
+  popup_profile.classList.remove('popup_open')
+  popup_place.classList.remove('popup_open')
+}
+
+popupCloseButton.forEach(popupCloseButton =>
+  popupCloseButton.addEventListener('click', closePopup)
+);
 
 // function popupClickHandler(event) {
 //     if (event.target.classList.contains('popup')) {
@@ -32,30 +142,3 @@ popupCloseButton.addEventListener('click', closePopup)
 // }
 
 // popup.addEventListener('mouseup', popupClickHandler)
-
-function submitForm(event) {
-    event.preventDefault()
-
-    profileName.textContent = nameField.value;
-    profileDescription.textContent = descriptionField.value;
-
-    closePopup();
-}
-
-form.addEventListener('submit', submitForm)
-
-// const like = document.querySelectorAll('.place__like');
-
-// function likeActive(i) {
-//   if (like[i].classList.contains('place__like_active')) {
-//       like[i].classList.remove('place__like_active')
-//   } else {
-//       like[i].classList.add('place__like_active')
-//   }
-// }
-
-// for (let i = 0; i < like.length; i++) {
-//   like[i].addEventListener('click', function() {
-//     likeActive(i)
-//   })
-// }
