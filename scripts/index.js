@@ -90,6 +90,11 @@ function createCard(elem){
   card.querySelector('.place__image').src = elem.link
   card.querySelector('.place__image').alt = elem.name
   card.querySelector('.place__title').innerText = elem.name
+
+  card.querySelector('.place__delete').addEventListener('click', (event) => {
+    event.target.closest('.place').remove()
+  })
+
   return card
 }
 
