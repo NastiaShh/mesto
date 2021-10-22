@@ -20,6 +20,7 @@ editButton.addEventListener('click', openPopup)
 
 
 // Открытие попапа добавления карточки
+
 const popup_place = document.querySelector('.popup_place');
 const addButton = document.querySelector('.profile__add');
 
@@ -35,12 +36,11 @@ addButton.addEventListener('click', openPopupPlace)
 
 
 
-// Форма редактирования профиля
+// Редактирование профиля
 
-const formButton = document.querySelector('.popup__button');
-const form = document.querySelector('.popup__form');
+const formProfile = document.querySelector('.popup__content_profile').querySelector('.popup__form');
 
-function submitForm(event) {
+function submitFormProfile(event) {
     event.preventDefault()
 
     profileName.textContent = nameProfileField.value;
@@ -49,7 +49,7 @@ function submitForm(event) {
     closePopup();
 }
 
-form.addEventListener('submit', submitForm)
+formProfile.addEventListener('submit', submitFormProfile)
 
 
 
@@ -85,8 +85,6 @@ const initialCards = [
 const articleElement = document.querySelector('.places')
 const templateElement = document.querySelector('.template').content
 
-initialCards.forEach(appendCard)
-
 function createCard(elem){
   const card = templateElement.querySelector('.place').cloneNode(true)
   card.querySelector('.place__image').src = elem.link
@@ -99,6 +97,32 @@ function appendCard(elem){
   const card = createCard(elem)
   articleElement.append(card)
 }
+
+initialCards.forEach(appendCard)
+
+
+
+// Добавление карточки
+
+function prependCard(elem){
+  const card = createCard(elem)
+  articleElement.prepend(card)
+}
+
+const formPlace = document.querySelector('.popup__content_place').querySelector('.popup__form');
+
+function submitFormPlace(event) {
+    event.preventDefault()
+    const elem = {
+      name: namePlaceField.value,
+      link: descriptionPlaceField.value,
+    }
+    prependCard(elem)
+
+    closePopup();
+}
+
+formPlace.addEventListener('submit', submitFormPlace)
 
 
 
