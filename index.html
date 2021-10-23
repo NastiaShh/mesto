@@ -31,7 +31,7 @@
   </footer>
 
   <div class="popup popup_profile">
-    <div class="popup__content popup__content_profile">
+    <div class="popup__content popup__content_form popup__content_profile">
       <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
       <h3 class="popup__title popup__title_profile">Редактировать профиль</h3>
       <form name="form" class="popup__form">
@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="popup popup_place">
-    <div class="popup__content popup__content_place">
+    <div class="popup__content popup__content_form popup__content_place">
       <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
       <h3 class="popup__title popup__title_place">Новое место</h3>
       <form name="form" class="popup__form popup__form_place">
@@ -52,8 +52,17 @@
       </form>
     </div>
   </div>
-
-  <template class="template">
+  <div class="popup popup_place-image">
+    <div class="popup__content popup__content_image">
+      <button type="button" class="popup__close popup__close_image" aria-label="Закрыть окно"></button>
+      <figure class="figure">
+        <img class="popup__image" src="" alt="">
+        <figcaption class="popup__image-caption"></figcaption>
+      </figure>
+    </div>
+  </div>
+  
+  <template class="template template_card">
     <article class="place">
       <button type="button" class="place__delete" aria-label="Удалить место"></button>
       <img class="place__image" src="./images/Мурманск.jpg" alt="Мурманск">

@@ -83,16 +83,20 @@ const initialCards = [
 ];
 
 const articleElement = document.querySelector('.places')
-const templateElement = document.querySelector('.template').content
+const templateCard = document.querySelector('.template_card').content
 
 function createCard(elem){
-  const card = templateElement.querySelector('.place').cloneNode(true)
+  const card = templateCard.querySelector('.place').cloneNode(true)
   card.querySelector('.place__image').src = elem.link
   card.querySelector('.place__image').alt = elem.name
   card.querySelector('.place__title').innerText = elem.name
 
   card.querySelector('.place__delete').addEventListener('click', (event) => {
     event.target.closest('.place').remove()
+  })
+
+  card.querySelector('.place__image').addEventListener('click', (event) => {
+    openPopupImage(elem)
   })
 
   return card
@@ -131,8 +135,26 @@ formPlace.addEventListener('submit', submitFormPlace)
 
 
 
-// Лайк карточки
+// Открытие и закрытие попапа изображения карточки
 
+const popup_image = document.querySelector('.popup_place-image')
+
+function openPopupImage(elem) {
+  const figure = popup_image.querySelector('.figure')
+  figure.querySelector('.popup__image').src = elem.link
+  figure.querySelector('.popup__image').alt = elem.name
+  figure.querySelector('.popup__image-caption').innerText = elem.name
+
+  popup_image.classList.add('popup_open')
+}
+
+closePopup()
+
+
+
+
+// Лайк карточки
+// FIXME:
 const like = document.querySelectorAll('.place__like');
 
 function likeActive(i) {
@@ -158,6 +180,7 @@ const popupCloseButton = document.querySelectorAll('.popup__close');
 function closePopup() {
   popup_profile.classList.remove('popup_open')
   popup_place.classList.remove('popup_open')
+  popup_image.classList.remove('popup_open')
 }
 
 popupCloseButton.forEach(popupCloseButton =>
