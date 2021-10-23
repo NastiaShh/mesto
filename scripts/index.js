@@ -128,7 +128,7 @@ function submitFormPlace(event) {
     }
     prependCard(elem)
 
-    closePopup();
+    closePopup()
 }
 
 formPlace.addEventListener('submit', submitFormPlace)
@@ -175,7 +175,7 @@ for (let i = 0; i < like.length; i++) {
 
 // Закрытие попапов
 
-const popupCloseButton = document.querySelectorAll('.popup__close');
+const popupCloseButton = document.querySelectorAll('.popup__close')
 
 function closePopup() {
   popup_profile.classList.remove('popup_open')
@@ -194,3 +194,11 @@ popupCloseButton.forEach(popupCloseButton =>
 // }
 
 // popup.addEventListener('mouseup', popupClickHandler)
+
+
+
+// Плавное открытие и закрытие попапов
+
+window.addEventListener('load', () => {
+  document.querySelectorAll('.popup').forEach((popup) => popup.classList.add('popup_smooth'))
+})
