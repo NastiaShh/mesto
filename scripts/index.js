@@ -98,6 +98,10 @@ function createCard(elem){
   card.querySelector('.place__image').addEventListener('click', (event) => {
     openPopupImage(elem)
   })
+  
+  card.querySelector('.place__like').addEventListener('click', (event) => {
+    likeActive(event.target)
+  })
 
   return card
 }
@@ -154,21 +158,13 @@ closePopup()
 
 
 // Лайк карточки
-// FIXME:
-const like = document.querySelectorAll('.place__like');
 
-function likeActive(i) {
-  if (like[i].classList.contains('place__like_active')) {
-      like[i].classList.remove('place__like_active')
+function likeActive(likeElem) {
+  if (likeElem.classList.contains('place__like_active')) {
+      likeElem.classList.remove('place__like_active')
   } else {
-      like[i].classList.add('place__like_active')
+      likeElem.classList.add('place__like_active')
   }
-}
-
-for (let i = 0; i < like.length; i++) {
-  like[i].addEventListener('click', function() {
-    likeActive(i)
-  })
 }
 
 
