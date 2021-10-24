@@ -10,4 +10,5 @@
   opacity: 0;
   justify-content: center;
   align-items: center;
+  transition: visibility 0.5s, opacity 0.5s;
 }
