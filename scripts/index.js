@@ -1,5 +1,6 @@
 // Переменные попапов и их кнопок
 
+const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
 const popupImage = document.querySelector('.popup_place-image');
@@ -80,11 +81,17 @@ addButton.addEventListener('click', (event) => {
 
 // Редактирование профиля
 
-editButton.addEventListener('click', (event) => {
+function initProfilePopupInput() {
   nameProfileField.value = profileName.textContent;
   descriptionProfileField.value = profileDescription.textContent;
+}
+
+editButton.addEventListener('click', (event) => {
+  initProfilePopupInput()
   openPopup(popupProfile)
 })
+
+initProfilePopupInput()
 
 function submitFormProfile(event) {
     event.preventDefault()
@@ -137,9 +144,26 @@ popupCloseButtons.forEach(popupCloseButton =>
   })
 );
 
+function popupClickHandler(event, popup) {
+  if (event.target.classList.contains('popup')) {
+    closePopup(popup)
+  }
+}
+
+popups.forEach(popup =>
+  popup.addEventListener('click', (event) => {
+    popupClickHandler(event, popup)
+  })
+);
+
+popups.forEach(popup =>
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+}}));
+
 
 // Добавление карточек
-
 
 function createCard(elem){
   const card = templateCard.querySelector('.place').cloneNode(true)
