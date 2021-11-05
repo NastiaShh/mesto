@@ -170,8 +170,9 @@ function createCard(elem){
 
   card.querySelector('.place__image').addEventListener('click', (event) => {
     const figure = popupImage.querySelector('.figure')
-    figure.querySelector('.popup__image').src = elem.link
-    figure.querySelector('.popup__image').alt = elem.name
+    const image = figure.querySelector('.popup__image')
+    image.src = elem.link
+    image.alt = elem.name
     figure.querySelector('.popup__image-caption').textContent = elem.name
 
     openPopup(popupImage)
