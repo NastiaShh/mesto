@@ -6,7 +6,6 @@ const popupPlace = document.querySelector('.popup_place');
 const popupImage = document.querySelector('.popup_place-image');
 const editButton = document.querySelector('.profile__info-edit');
 const addButton = document.querySelector('.profile__add');
-const popupCloseButtons = document.querySelectorAll('.popup__close')
 
 // Переменные формы редактирования профиля
 
@@ -58,7 +57,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
 
 
 // Функции и обработчики
@@ -139,24 +137,16 @@ function likeActive(likeElem) {
 
 // Закрытие попапов
 
-popupCloseButtons.forEach(popupCloseButton =>
-  popupCloseButton.addEventListener('click', (event) => {
-    const popup = popupCloseButton.closest('.popup')
-    closePopup(popup)
-  })
-);
-
-function popupClickHandler(event, popup) {
-  if (event.target.classList.contains('popup')) {
-    closePopup(popup)
-  }
-}
-
-popups.forEach(popup =>
+popups.forEach((popup) => {
   popup.addEventListener('click', (event) => {
-    popupClickHandler(event, popup)
+    if (event.target.classList.contains('popup_open')) {
+      closePopup(popup)
+    }
+    if (event.target.classList.contains('popup__close')) {
+      closePopup(popup)
+    }
   })
-);
+})
 
 function closeByEscape(event) {
   if (event.key === 'Escape') {
