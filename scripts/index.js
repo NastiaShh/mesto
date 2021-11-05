@@ -64,11 +64,13 @@ const initialCards = [
 // Функции и обработчики
 
 function openPopup(popup) {
-  popup.classList.add('popup_open');
+  popup.classList.add('popup_open')
+  document.addEventListener('keydown', closeByEscape)
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_open')
+  document.removeEventListener('keydown', closeByEscape)
 }
 
 
@@ -99,7 +101,7 @@ function submitFormProfile(event) {
     profileName.textContent = nameProfileField.value;
     profileDescription.textContent = descriptionProfileField.value;
 
-    closePopup(popupProfile);
+    closePopup(popupProfile)
 }
 
 formProfile.addEventListener('submit', submitFormProfile)
@@ -156,11 +158,12 @@ popups.forEach(popup =>
   })
 );
 
-popups.forEach(popup =>
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-}}));
+function closeByEscape(event) {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_open')
+    closePopup(openedPopup)
+  }
+}
 
 
 // Добавление карточек

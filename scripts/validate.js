@@ -33,7 +33,6 @@ const hasInvalidInput = (inputList) => {
 };
 
 const toggleButtonState = (inputList, saveButton, validationConfig) => {
-  debugger
   if (hasInvalidInput(inputList)) {
     saveButton.classList.add(validationConfig.saveButtonError);
     saveButton.setAttribute('disabled', true);
