@@ -8,14 +8,13 @@ Cервис Mesto — интерактивная страница, куда мо
 
 [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-Изображения взяты из коллекций бесплатных фотографий https://unsplash.com и https://www.pexels.com/ru-ru/
-
 ## Стек:
 - HTML;
 - CSS;
 - JavaScript.
 
 ## Реализовано:
+- применение ООП;
 - методология БЭМ;
 - файловая структура по БЭМ (Nested);
 - соблюдение семантики;

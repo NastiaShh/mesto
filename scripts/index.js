@@ -1,9 +1,34 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  saveButton: '.popup__save',
+  inputError: 'popup__input_type_error',
+  saveButtonError: 'popup__save_inactive'
+}
+
+const cardConfig = {
+  templateSelector: '.template_card',
+  placeSelector: '.place',
+  placeContainerSelector: '.popup_place-image',
+  figureSelector: '.figure',
+  placePopupImageSelector: '.popup__image',
+  placeCaptionSelector: '.popup__image-caption',
+  likeButton: '.place__like',
+  likeActiveButton: 'place__like_active',
+  deleteButton: '.place__delete',
+  placeTitleSelector: '.place__title',
+  placeImageSelector: '.place__image'
+}
+
+
 // Переменные попапов и их кнопок
 
 const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
-const popupImage = document.querySelector('.popup_place-image');
 const editButton = document.querySelector('.profile__info-edit');
 const addButton = document.querySelector('.profile__add');
 
@@ -27,7 +52,6 @@ const formPlace = document.querySelector('.popup__content_place').querySelector(
 // Переменные карточек
 
 const articleElement = document.querySelector('.places')
-const templateCard = document.querySelector('.template_card').content
 
 // Карточки по умолчанию
 
@@ -128,13 +152,6 @@ function submitFormPlace(event) {
 formPlace.addEventListener('submit', submitFormPlace)
 
 
-// Лайк карточки
-
-function likeActive(likeElem) {
-  likeElem.classList.toggle('place__like_active')
-}
-
-
 // Закрытие попапов
 
 popups.forEach((popup) => {
@@ -155,39 +172,19 @@ function closeByEscape(event) {
   }
 }
 
-
-// Добавление карточек
-
-function createCard(elem){
-  const card = templateCard.querySelector('.place').cloneNode(true)
-  card.querySelector('.place__image').src = elem.link
-  card.querySelector('.place__image').alt = elem.name
-  card.querySelector('.place__title').textContent = elem.name
-
-  card.querySelector('.place__delete').addEventListener('click', (event) => {
-    event.target.closest('.place').remove()
-  })
-
-  card.querySelector('.place__image').addEventListener('click', (event) => {
-    const figure = popupImage.querySelector('.figure')
-    const image = figure.querySelector('.popup__image')
-    image.src = elem.link
-    image.alt = elem.name
-    figure.querySelector('.popup__image-caption').textContent = elem.name
-
-    openPopup(popupImage)
-  })
-  
-  card.querySelector('.place__like').addEventListener('click', (event) => {
-    likeActive(event.target)
-  })
-
-  return card
-}
-
-function appendCard(elem){
+function appendCard(elem) {
   const card = createCard(elem)
   articleElement.append(card)
 }
 
 initialCards.forEach(appendCard)
+
+function createCard(elem) {
+  const card = new Card(cardConfig, elem.name, elem.link, '.template', openPopup)
+  return card.generateCard()
+}
+
+const formProfileValidator = new FormValidator(validationConfig, formProfile);
+formProfileValidator.enableValidation(); 
+const formPlaceValidator = new FormValidator(validationConfig, formPlace);
+formPlaceValidator.enableValidation();
