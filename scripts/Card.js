@@ -22,6 +22,14 @@ export class Card {
     this._openPopup(popupImage);
   }
 
+  _likeCard(event) {
+    event.target.classList.toggle(this._cardConfig.likeActiveButton); 
+  }
+
+  _deleteCard(event) {
+    event.target.closest(this._cardConfig.placeSelector).remove()
+  }
+
   _setEventListeners() {
 
     this._element.querySelector(this._cardConfig.placeImageSelector).addEventListener('click', () => { 
@@ -29,11 +37,11 @@ export class Card {
     });
 
     this._element.querySelector(this._cardConfig.likeButton).addEventListener('click', (event) => {
-      event.target.classList.toggle(this._cardConfig.likeActiveButton); 
+      this._likeCard(event);
     });
 
     this._element.querySelector(this._cardConfig.deleteButton).addEventListener('click', (event) => {
-      event.target.closest(this._cardConfig.placeSelector).remove()
+      this._deleteCard(event);
     });
   }
 

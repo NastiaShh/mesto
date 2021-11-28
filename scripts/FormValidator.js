@@ -57,6 +57,13 @@ export class FormValidator {
       this._toggleButtonState(inputList, saveButton);
     });
   };
+  
+  hideAllErrors = () => {
+    const inputList = Array.from(this._form.querySelectorAll(this._validationConfig.inputSelector));
+    inputList.forEach((input) => {
+      this._hideInputError(input);
+    });
+  }
 
   enableValidation = () => {
     this._setEventListeners();

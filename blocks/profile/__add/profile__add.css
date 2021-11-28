@@ -1,4 +1,5 @@
 .profile__add {
+  margin-left: 10px;
   width: 150px;
   min-height: 50px;
   background-image: url(../../../images/Add_Button.svg);
@@ -18,6 +19,7 @@
 @media screen and (max-width: 1023px) {
   .profile__add {
     margin-top: 20px;
+    margin-left: 0;
     width: 282px;
   }
 }
