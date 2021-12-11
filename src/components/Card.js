@@ -1,25 +1,15 @@
 export class Card {
-  constructor(cardConfig, name, link, cardSelector, openPopup) {
+  constructor(cardConfig, name, link, cardSelector, handleCardClick) {
     this._cardConfig = cardConfig;
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
-    this._openPopup = openPopup;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
     const templateCard = document.querySelector(this._cardConfig.templateSelector).content.querySelector(this._cardConfig.placeSelector).cloneNode(true);
     return templateCard;
-  }
-
-  _openImagePopup() {
-    const popupImage = document.querySelector(this._cardConfig.placeContainerSelector);
-    const figure = popupImage.querySelector(this._cardConfig.figureSelector)
-    const image = figure.querySelector(this._cardConfig.placePopupImageSelector)
-    image.src = this._link
-    image.alt = this._name
-    figure.querySelector(this._cardConfig.placeCaptionSelector).textContent = this._name
-    this._openPopup(popupImage);
   }
 
   _likeCard(event) {
@@ -33,7 +23,7 @@ export class Card {
   _setEventListeners() {
 
     this._element.querySelector(this._cardConfig.placeImageSelector).addEventListener('click', () => { 
-      this._openImagePopup();
+      this._handleCardClick(this._link, this._name);
     });
 
     this._element.querySelector(this._cardConfig.likeButton).addEventListener('click', (event) => {
