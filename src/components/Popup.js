@@ -1,18 +1,17 @@
-import { popupConfig } from '../utils/constants.js';
-
 export class Popup {
-  constructor(popupSelector){
+  constructor(popupConfig, popupSelector){
+    this._popupConfig = popupConfig;
     this._popup = document.querySelector(popupSelector)
     this._handleEscClose = this._handleEscClose.bind(this)
   }
 
   open() {
-    this._popup.classList.add(popupConfig.openPopup)
+    this._popup.classList.add(this._popupConfig.openPopup)
     document.addEventListener('keydown', this._handleEscClose)
   }
   
   close() {
-    this._popup.classList.remove(popupConfig.openPopup)
+    this._popup.classList.remove(this._popupConfig.openPopup)
     document.removeEventListener('keydown', this._handleEscClose)
   }
   
@@ -24,10 +23,10 @@ export class Popup {
 
   setEventListeners() {
     this._popup.addEventListener('click', (event) => {
-      if (event.target.classList.contains(popupConfig.openPopup)) {
+      if (event.target.classList.contains(this._popupConfig.openPopup)) {
         this.close()
       }
-      if (event.target.classList.contains(popupConfig.closeButton)) {
+      if (event.target.classList.contains(this._popupConfig.closeButton)) {
         this.close()
       }
     })

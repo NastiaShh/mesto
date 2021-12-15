@@ -1,16 +1,15 @@
 import { Popup } from "./Popup.js";
-import { formConfig } from "../utils/constants.js";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, submitHandler){
-    super(popupSelector)
+  constructor(popupConfig, formConfig, popupSelector, submitHandler){
+    super(popupConfig, popupSelector)
     this._submitHandler = submitHandler
     this._form = this._popup.querySelector(formConfig.formSelector)
     this._inputList = this._form.querySelectorAll(formConfig.inputSelector)
   }
 
   _getInputValues() {
-    let formValues = {};
+    const formValues = {};
 
     this._inputList.forEach((input) => {
       formValues[input.name] = input.value;

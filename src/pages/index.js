@@ -6,7 +6,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
 import { initialCards, validationConfig, cardConfig, popupConfig, userConfig, editButton, addButton, 
-nameProfileField, descriptionProfileField, formProfile, formPlace } from '../utils/constants.js';
+nameProfileField, descriptionProfileField, formProfile, formPlace, formConfig } from '../utils/constants.js';
 
 
 function createCard(elem) {
@@ -54,7 +54,7 @@ formProfileValidator.enableValidation();
 const formPlaceValidator = new FormValidator(validationConfig, formPlace);
 formPlaceValidator.enableValidation();
 
-const popupWithImage = new PopupWithImage(popupConfig.placeContainerSelector);
+const popupWithImage = new PopupWithImage(popupConfig, popupConfig.placeContainerSelector);
 popupWithImage.setEventListeners();
 
 const cardsSection = new Section({
@@ -63,10 +63,10 @@ const cardsSection = new Section({
 }, cardConfig.placesSelector);
 cardsSection.renderItems();
 
-const popupWithFormProfile = new PopupWithForm(popupConfig.popupProfileSelector, submitFormProfile);
+const popupWithFormProfile = new PopupWithForm(popupConfig, formConfig, popupConfig.popupProfileSelector, submitFormProfile);
 popupWithFormProfile.setEventListeners();
 
-const popupWithFormPlace = new PopupWithForm(popupConfig.popupPlaceSelector, submitFormPlace);
+const popupWithFormPlace = new PopupWithForm(popupConfig, formConfig, popupConfig.popupPlaceSelector, submitFormPlace);
 popupWithFormPlace.setEventListeners();
 
 const profileInfo = new UserInfo({
