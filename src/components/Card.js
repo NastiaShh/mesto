@@ -16,8 +16,9 @@ export class Card {
     event.target.classList.toggle(this._cardConfig.likeActiveButton); 
   }
 
-  _deleteCard(event) {
-    event.target.closest(this._cardConfig.placeSelector).remove()
+  _deleteCard() {
+    this._element.remove()
+    this._element = null
   }
 
   _setEventListeners() {
@@ -37,10 +38,11 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector(this._cardConfig.placeImageSelector);
     this._setEventListeners();
     this._element.querySelector(this._cardConfig.placeTitleSelector).textContent = this._name;
-    this._element.querySelector(this._cardConfig.placeImageSelector).src = this._link;
-    this._element.querySelector(this._cardConfig.placeImageSelector).alt = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     return this._element;
   }
 }

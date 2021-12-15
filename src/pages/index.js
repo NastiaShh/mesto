@@ -17,7 +17,6 @@ function createCard(elem) {
 function initProfilePopupInput({name, info}) {
   nameProfileField.value = name;
   descriptionProfileField.value = info;
-  formProfileValidator.hideAllErrors();
 }
 
 function submitFormProfile(formValues) {
@@ -40,10 +39,12 @@ function handleCardClick(src, name) {
 }
 
 addButton.addEventListener('click', () => {
+  formPlaceValidator.resetValidation()
   popupWithFormPlace.open()
 })
 
 editButton.addEventListener('click', () => {
+  formProfileValidator.resetValidation()
   initProfilePopupInput(profileInfo.getUserInfo())
   popupWithFormProfile.open()
 })
