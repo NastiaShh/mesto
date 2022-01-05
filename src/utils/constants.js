@@ -11,6 +11,7 @@ export const cardConfig = {
   placeSelector: '.place',
   likeButton: '.place__like',
   likeActiveButton: 'place__like_active',
+  likesCountSelector: '.place__like-count',
   deleteButton: '.place__delete',
   placeTitleSelector: '.place__title',
   placeImageSelector: '.place__image',

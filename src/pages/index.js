@@ -34,7 +34,8 @@ Promise.all([
       cardsSection.addItem(
         {
           name: card.name,
-          link: card.link
+          link: card.link,
+          likes: card.likes
         },
         true,
       )
@@ -46,7 +47,7 @@ Promise.all([
 ])
 
 function createCard(elem) {
-  const card = new Card(cardConfig, elem.name, elem.link, '.template', handleCardClick)
+  const card = new Card(cardConfig, elem.name, elem.link, elem.likes.length, '.template', handleCardClick)
   return card.generateCard()
 }
 

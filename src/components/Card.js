@@ -1,8 +1,9 @@
 export class Card {
-  constructor(cardConfig, name, link, cardSelector, handleCardClick) {
+  constructor(cardConfig, name, link, likesCount, cardSelector, handleCardClick) {
     this._cardConfig = cardConfig;
     this._name = name;
     this._link = link;
+    this._likesCount = likesCount;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -43,6 +44,8 @@ export class Card {
     this._element.querySelector(this._cardConfig.placeTitleSelector).textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
+    this._likesCountElement = this._element.querySelector(this._cardConfig.likesCountSelector);
+    this._likesCountElement.textContent = this._likesCount;
     return this._element;
   }
 }
