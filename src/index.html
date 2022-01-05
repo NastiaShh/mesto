@@ -12,7 +12,7 @@
   <main class="content">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="<%=require('./images/Profile_Image.png')%>" alt="Аватар">
+        <img class="profile__avatar" src="" alt="Аватар">
         <div class="profile__info">
           <h1 class="profile__info-name">Жак-Ив Кусто</h1>
           <button type="button" class="profile__info-edit" aria-label="Редактировать профиль"></button>
@@ -71,7 +71,10 @@
       <img class="place__image" src="/" alt="/">
       <div class="place__info">
         <h2 class="place__title"></h2>
-        <button type="button" class="place__like" aria-label="Поставить лайк"></button>
+        <div class="place__like-container">
+          <button type="button" class="place__like" aria-label="Поставить лайк"></button>
+          <div class="place__like-count"></div>
+        </div>
       </div>
     </article>
   </template>

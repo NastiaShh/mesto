@@ -5,9 +5,45 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
-import { initialCards, validationConfig, cardConfig, popupConfig, userConfig, editButton, addButton, 
+import { Api } from '../components/Api.js';
+import { validationConfig, cardConfig, popupConfig, userConfig, editButton, addButton, 
 nameProfileField, descriptionProfileField, formProfile, formPlace, formConfig } from '../utils/constants.js';
 
+const api = new Api({
+  address: 'https://nomoreparties.co/v1/cohort-32',
+  token: '6e39987b-3720-4720-b442-4085767cdc72'
+})
+
+Promise.all([
+  api.getUserInfo()
+  .then(userData => {
+    profileInfo.setUserInfo(
+      {
+        name: userData.name,
+        info: userData.about
+      }
+    )
+    profileInfo.setUserAvatar(userData.avatar)
+  })
+  .catch((err) => {
+    console.log(err);
+  }),
+  api.getInitialCards()
+  .then(cardsData => {
+    cardsData.forEach(card => {
+      cardsSection.addItem(
+        {
+          name: card.name,
+          link: card.link
+        },
+        true,
+      )
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  }),
+])
 
 function createCard(elem) {
   const card = new Card(cardConfig, elem.name, elem.link, '.template', handleCardClick)
@@ -24,14 +60,37 @@ function submitFormProfile(formValues) {
     name: formValues.name,
     info: formValues.description
   })
+  api.setUserInfo({
+    name: formValues.name,
+    about: formValues.description
+  })
+  .then(userData => {
+    profileInfo.setUserInfo({
+      name: userData.name,
+      info: userData.about
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 function submitFormPlace(formValues) {
-  const elem = {
+  api.addCard({
     name: formValues.name,
     link: formValues.description,
-  }
-  cardsSection.addItem(elem)
+  })
+  .then(cardsData => {
+    cardsSection.addItem(
+      {
+        name: cardsData.name,
+        link: cardsData.link
+      }
+    )
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 function handleCardClick(src, name) {
@@ -58,7 +117,7 @@ const popupWithImage = new PopupWithImage(popupConfig, popupConfig.placeContaine
 popupWithImage.setEventListeners();
 
 const cardsSection = new Section({
-  items: initialCards,
+  items: [],
   renderer: createCard
 }, cardConfig.placesSelector);
 cardsSection.renderItems();
@@ -71,5 +130,6 @@ popupWithFormPlace.setEventListeners();
 
 const profileInfo = new UserInfo({
   userNameSelector: userConfig.profileNameSelector, 
-  userInfoSelector: userConfig.profileInfoSelector
+  userInfoSelector: userConfig.profileInfoSelector,
+  userAvatarSelector: userConfig.profileAvatarSelector
 });
