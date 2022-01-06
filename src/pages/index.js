@@ -3,6 +3,7 @@ import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
 import { Api } from '../components/Api.js';
@@ -20,7 +21,8 @@ Promise.all([
     profileInfo.setUserInfo(
       {
         name: userData.name,
-        info: userData.about
+        info: userData.about,
+        userId: userData._id,
       }
     )
     profileInfo.setUserAvatar(userData.avatar)
@@ -35,7 +37,9 @@ Promise.all([
         {
           name: card.name,
           link: card.link,
-          likes: card.likes
+          likes: card.likes,
+          ownerId: card.owner._id,
+          cardId: card._id,
         },
         true,
       )
@@ -47,7 +51,7 @@ Promise.all([
 ])
 
 function createCard(elem) {
-  const card = new Card(cardConfig, elem.name, elem.link, elem.likes.length, '.template', handleCardClick)
+  const card = new Card(cardConfig, elem.name, elem.link, elem.ownerId, elem.cardId, (elem.ownerId === profileInfo.getUserId()), elem.likes.length, '.template', handleCardClick, handleCardDelete)
   return card.generateCard()
 }
 
@@ -85,7 +89,10 @@ function submitFormPlace(formValues) {
     cardsSection.addItem(
       {
         name: cardsData.name,
-        link: cardsData.link
+        link: cardsData.link,
+        likes: cardsData.likes,
+        ownerId: cardsData.owner._id,
+        cardId: cardsData._id,
       }
     )
   })
@@ -94,8 +101,22 @@ function submitFormPlace(formValues) {
   })
 }
 
+function submitCardDelete(card) {
+  api.deleteCard(card.getCardId())
+  .then(data => {
+    card.deleteCard()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 function handleCardClick(src, name) {
   popupWithImage.open(src, name)
+}
+
+function handleCardDelete(card) {
+  popupWithConfirmation.open(card)
 }
 
 addButton.addEventListener('click', () => {
@@ -128,6 +149,9 @@ popupWithFormProfile.setEventListeners();
 
 const popupWithFormPlace = new PopupWithForm(popupConfig, formConfig, popupConfig.popupPlaceSelector, submitFormPlace);
 popupWithFormPlace.setEventListeners();
+
+const popupWithConfirmation = new PopupWithConfirmation(popupConfig, formConfig, popupConfig.popupDeleteCardSelector, submitCardDelete);
+popupWithConfirmation.setEventListeners();
 
 const profileInfo = new UserInfo({
   userNameSelector: userConfig.profileNameSelector, 

@@ -58,4 +58,36 @@ export class Api {
     .then(this._checkResponseStatus);
   }
 
+  setLike(cardId) {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      }, 
+    })
+    .then(this._checkResponseStatus);
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._address}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      }, 
+    })
+    .then(this._checkResponseStatus);
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._address}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      }, 
+    })
+    .then(this._checkResponseStatus);
+  }
 }
