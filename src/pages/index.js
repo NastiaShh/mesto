@@ -15,9 +15,8 @@ const api = new Api({
   token: '6e39987b-3720-4720-b442-4085767cdc72'
 })
 
-Promise.all([
-  api.getUserInfo()
-  .then(userData => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardsData]) => {
     profileInfo.setUserInfo(
       {
         name: userData.name,
@@ -26,12 +25,7 @@ Promise.all([
       }
     )
     profileInfo.setUserAvatar(userData.avatar)
-  })
-  .catch((err) => {
-    console.log(err);
-  }),
-  api.getInitialCards()
-  .then(cardsData => {
+
     cardsData.forEach(card => {
       cardsSection.addItem(
         {
@@ -47,8 +41,8 @@ Promise.all([
   })
   .catch((err) => {
     console.log(err);
-  }),
-])
+  })
+
 
 function createCard(elem) {
   const card = new Card(cardConfig, elem.name, elem.link, profileInfo.getUserId(), elem.ownerId, elem.cardId, 
