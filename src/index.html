@@ -12,7 +12,9 @@
   <main class="content">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="" alt="Аватар">
+        <button type="button" class="profile__avatar-button" aria-label="Изменить аватар">
+          <img class="profile__avatar" src="" alt="Аватар">
+        </button>
         <div class="profile__info">
           <h1 class="profile__info-name">Жак-Ив Кусто</h1>
           <button type="button" class="profile__info-edit" aria-label="Редактировать профиль"></button>
@@ -29,6 +31,17 @@
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
   </footer>
 
+  <div class="popup popup_change-avatar">
+    <div class="popup__content popup__content_form popup__content_change-avatar">
+      <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
+      <h3 class="popup__title popup__title_change-avatar">Обновить аватар</h3>
+      <form name="form" class="popup__form" novalidate>
+        <input id="avatar-input" type="url" name="avatar" placeholder="Ссылка на картинку" required class="popup__input popup__input_change-avatar">
+        <span class="popup__input-error avatar-input-error"></span>
+        <button type="submit" class="popup__save popup__save_change-avatar">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <div class="popup popup_profile">
     <div class="popup__content popup__content_form popup__content_profile">
       <button type="button" class="popup__close" aria-label="Закрыть окно"></button>

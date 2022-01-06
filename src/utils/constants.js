@@ -27,7 +27,8 @@ export const popupConfig = {
   placeCaptionSelector: '.popup__image-caption',
   popupPlaceSelector: '.popup_place',
   popupProfileSelector: '.popup_profile',
-  popupDeleteCardSelector: '.popup_delete-card'
+  popupDeleteCardSelector: '.popup_delete-card',
+  popupAvatarSelector: '.popup_change-avatar'
 }
 
 export const formConfig = {
@@ -45,6 +46,7 @@ export const userConfig = {
 
 export const editButton = document.querySelector('.profile__info-edit');
 export const addButton = document.querySelector('.profile__add');
+export const avatarButton = document.querySelector('.profile__avatar-button');
 
 // Переменные формы редактирования профиля
 
@@ -53,6 +55,8 @@ export const nameProfileField = document.querySelector('.popup__input_profile_na
 export const descriptionProfileField = document.querySelector('.popup__input_profile_description');
 
 export const formProfile = document.querySelector('.popup__content_profile').querySelector('.popup__form');
+
+export const formAvatar = document.querySelector('.popup__content_change-avatar').querySelector('.popup__form');
 
 // Переменные формы добавления карточки
 

@@ -43,6 +43,19 @@ export class Api {
     .then(this._checkResponseStatus);
   }
 
+  setUserAvatar({avatar}) {
+    return fetch(`${this._address}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      }, 
+      
+      body: JSON.stringify({avatar})
+    })
+    .then(this._checkResponseStatus);
+  }
+
   addCard({name, link}) {
     return fetch(`${this._address}/cards`, {
       method: 'POST',
@@ -69,7 +82,7 @@ export class Api {
     .then(this._checkResponseStatus);
   }
 
-  deleteLike(cardId) {
+  removeLike(cardId) {
     return fetch(`${this._address}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: {

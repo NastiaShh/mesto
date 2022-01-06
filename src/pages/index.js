@@ -8,7 +8,7 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
 import { Api } from '../components/Api.js';
 import { validationConfig, cardConfig, popupConfig, userConfig, editButton, addButton, 
-nameProfileField, descriptionProfileField, formProfile, formPlace, formConfig } from '../utils/constants.js';
+nameProfileField, descriptionProfileField, formProfile, formPlace, formConfig, avatarButton, formAvatar } from '../utils/constants.js';
 
 const api = new Api({
   address: 'https://nomoreparties.co/v1/cohort-32',
@@ -51,7 +51,8 @@ Promise.all([
 ])
 
 function createCard(elem) {
-  const card = new Card(cardConfig, elem.name, elem.link, elem.ownerId, elem.cardId, (elem.ownerId === profileInfo.getUserId()), elem.likes.length, '.template', handleCardClick, handleCardDelete)
+  const card = new Card(cardConfig, elem.name, elem.link, profileInfo.getUserId(), elem.ownerId, elem.cardId, 
+  (elem.ownerId === profileInfo.getUserId()), elem.likes, '.template', handleCardClick, handleCardDelete, setLike, removeLike)
   return card.generateCard()
 }
 
@@ -101,10 +102,42 @@ function submitFormPlace(formValues) {
   })
 }
 
+function submitFormAvatar(formValues) {
+  api.setUserAvatar({
+    avatar: formValues.avatar,
+  })
+  .then(userData => {
+    profileInfo.setUserAvatar(userData.avatar)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 function submitCardDelete(card) {
   api.deleteCard(card.getCardId())
   .then(data => {
     card.deleteCard()
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+function setLike(card) {
+  api.setLike(card.getCardId())
+  .then(data => {
+    card.updateLikes(data.likes)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+function removeLike(card) {
+  api.removeLike(card.getCardId())
+  .then(data => {
+    card.updateLikes(data.likes)
   })
   .catch((err) => {
     console.log(err);
@@ -130,10 +163,17 @@ editButton.addEventListener('click', () => {
   popupWithFormProfile.open()
 })
 
+avatarButton.addEventListener('click', () => {
+  formAvatarValidator.resetValidation()
+  popupWithFormAvatar.open()
+})
+
 const formProfileValidator = new FormValidator(validationConfig, formProfile);
 formProfileValidator.enableValidation();
 const formPlaceValidator = new FormValidator(validationConfig, formPlace);
 formPlaceValidator.enableValidation();
+const formAvatarValidator = new FormValidator(validationConfig, formAvatar);
+formAvatarValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage(popupConfig, popupConfig.placeContainerSelector);
 popupWithImage.setEventListeners();
@@ -149,6 +189,9 @@ popupWithFormProfile.setEventListeners();
 
 const popupWithFormPlace = new PopupWithForm(popupConfig, formConfig, popupConfig.popupPlaceSelector, submitFormPlace);
 popupWithFormPlace.setEventListeners();
+
+const popupWithFormAvatar = new PopupWithForm(popupConfig, formConfig, popupConfig.popupAvatarSelector, submitFormAvatar);
+popupWithFormAvatar.setEventListeners();
 
 const popupWithConfirmation = new PopupWithConfirmation(popupConfig, formConfig, popupConfig.popupDeleteCardSelector, submitCardDelete);
 popupWithConfirmation.setEventListeners();

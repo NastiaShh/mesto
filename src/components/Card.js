@@ -1,15 +1,18 @@
 export class Card {
-  constructor(cardConfig, name, link, ownerId, cardId, isUserCard, likesCount, cardSelector, handleCardClick, handleCardDelete) {
+  constructor(cardConfig, name, link, userId, ownerId, cardId, isUserCard, likes, cardSelector, handleCardClick, handleCardDelete, setLike, removeLike) {
     this._cardConfig = cardConfig;
     this._name = name;
     this._link = link;
+    this._userId = userId;
     this._ownerId = ownerId;
     this._cardId = cardId;
     this._isUserCard = isUserCard;
-    this._likesCount = likesCount;
+    this._likes = likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._setLike = setLike;
+    this._removeLike = removeLike;
   }
 
   _getTemplate() {
@@ -17,8 +20,27 @@ export class Card {
     return templateCard;
   }
 
-  _likeCard(event) {
-    event.target.classList.toggle(this._cardConfig.likeActiveButton);
+  _isLikedByUser() {
+    return this._likes.some(like => like['_id'] === this._userId)
+
+  }
+
+  _likeCard() {
+    if(this._isLikedByUser()) {
+      this._removeLike(this)
+    } else {
+      this._setLike(this)
+    }
+  }
+
+  updateLikes(likes) {
+    this._likes = likes;
+    this._likesCountElement.textContent = this._likes.length;
+    if(this._isLikedByUser()) {
+      this._likeButton.classList.add(this._cardConfig.likeActiveButton)
+    } else {
+      this._likeButton.classList.remove(this._cardConfig.likeActiveButton)
+    }
   }
 
   deleteCard() {
@@ -57,7 +79,8 @@ export class Card {
       this._deleteButton.classList.add('place__delete_active');
     };
     this._likesCountElement = this._element.querySelector(this._cardConfig.likesCountSelector);
-    this._likesCountElement.textContent = this._likesCount;
+    this._likeButton = this._element.querySelector(this._cardConfig.likeButton);
+    this.updateLikes(this._likes);
     return this._element;
   }
 }
