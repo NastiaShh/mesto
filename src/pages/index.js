@@ -62,6 +62,7 @@ function initProfilePopupInput({name, info}) {
 }
 
 function submitFormProfile(formValues) {
+  popupWithFormProfile.renderLoading(true)
   profileInfo.setUserInfo({
     name: formValues.name,
     info: formValues.description
@@ -79,9 +80,13 @@ function submitFormProfile(formValues) {
   .catch((err) => {
     console.log(err);
   })
+  .finally(() => {
+    popupWithFormProfile.renderLoading(false)
+  })
 }
 
 function submitFormPlace(formValues) {
+  popupWithFormPlace.renderLoading(true)
   api.addCard({
     name: formValues.name,
     link: formValues.description,
@@ -100,17 +105,25 @@ function submitFormPlace(formValues) {
   .catch((err) => {
     console.log(err);
   })
+  .finally(() => {
+    popupWithFormPlace.renderLoading(false)
+  })
 }
 
 function submitFormAvatar(formValues) {
+  popupWithFormAvatar.renderLoading(true)
   api.setUserAvatar({
     avatar: formValues.avatar,
   })
+
   .then(userData => {
     profileInfo.setUserAvatar(userData.avatar)
   })
   .catch((err) => {
     console.log(err);
+  })
+  .finally(() => {
+    popupWithFormAvatar.renderLoading(false)
   })
 }
 
