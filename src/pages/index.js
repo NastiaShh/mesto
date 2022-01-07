@@ -57,10 +57,6 @@ function initProfilePopupInput({name, info}) {
 
 function submitFormProfile(formValues) {
   popupWithFormProfile.renderLoading(true)
-  profileInfo.setUserInfo({
-    name: formValues.name,
-    info: formValues.description
-  })
   api.setUserInfo({
     name: formValues.name,
     about: formValues.description
