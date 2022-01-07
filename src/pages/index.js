@@ -70,6 +70,7 @@ function submitFormProfile(formValues) {
       name: userData.name,
       info: userData.about
     })
+    popupWithFormProfile.close()
   })
   .catch((err) => {
     console.log(err);
@@ -95,6 +96,7 @@ function submitFormPlace(formValues) {
         cardId: cardsData._id,
       }
     )
+    popupWithFormPlace.close()
   })
   .catch((err) => {
     console.log(err);
@@ -109,9 +111,9 @@ function submitFormAvatar(formValues) {
   api.setUserAvatar({
     avatar: formValues.avatar,
   })
-
   .then(userData => {
     profileInfo.setUserAvatar(userData.avatar)
+    popupWithFormAvatar.close()
   })
   .catch((err) => {
     console.log(err);
@@ -125,6 +127,7 @@ function submitCardDelete(card) {
   api.deleteCard(card.getCardId())
   .then(data => {
     card.deleteCard()
+    popupWithConfirmation.close()
   })
   .catch((err) => {
     console.log(err);
