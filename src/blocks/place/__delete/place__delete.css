@@ -1,6 +1,7 @@
 .place__delete {
   background-image: url(../../../images/Delete_Button.svg);
   background-color: transparent;
+  background-size: cover;
   border: none;
   width: 18px;
   height: 19px;
