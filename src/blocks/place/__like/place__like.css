@@ -1,6 +1,7 @@
 .place__like {
   background-image: url(../../../images/Like_Button.svg);
   background-color: transparent;
+  background-size: cover;
   border: none;
   width: 22px;
   height: 19px;
